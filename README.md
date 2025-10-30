@@ -1,1 +1,2 @@
-# class-from10_28
+## class notes
+some class notes for class from oct 28, inter & list
