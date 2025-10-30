@@ -2,7 +2,7 @@
 title: "10_28_iter_listcol"
 author: "Yurou Liu"
 date: "2025-10-30"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
