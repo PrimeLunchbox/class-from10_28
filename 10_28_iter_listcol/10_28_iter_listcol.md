@@ -34,3 +34,6 @@ list can be put in df in col.<br> **df = tibble(name = c(“null”, “null”,
 **map(df\$samp, func)** \#output list of results after function
 operation.<br> **df %\>%** <br> **mutate(summary = map(samp, func))**
 <br>
+
+get list cols…<br> **df1 = df %\>%** <br> **nest(data =
+col_name1:col_name2)**<br> ![](./images/image2.jpg)
