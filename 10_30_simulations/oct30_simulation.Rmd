@@ -1,0 +1,73 @@
+---
+title: "oct30_simulation"
+author: "Yurou Liu"
+date: "2025-11-06"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## writing function
+```{r}
+library(tidyverse)
+
+sim_mean_sd = function(samp_size, mu = 2, sigma = 3) {
+  
+  sim_data = tibble(
+    x = rnorm(samp_size, mean = mu, sd = sigma),
+  )
+  
+  sim_data %>% 
+    summarize(
+      mu_hat = mean(x),
+      sigma_hat = sd(x)
+    )
+}
+```
+
+## simulate
+
+```{r}
+#start with a for loop
+
+output = vector("list", length = 100)
+
+for (i in 1:100) {
+  output[[i]] = sim_mean_sd(samp_size = 30)
+}
+
+bind_rows(output)
+```
+
+## loop function
+
+```{r}
+sim_results = 
+  rerun(100, sim_mean_sd(samp_size = 30)) %>% 
+  bind_rows()
+```
+
+
+## simulation with list input
+
+```{r}
+n_list = list(
+  "n = 30" = 30, 
+  "n = 60" = 60, 
+  "n = 120" = 120, 
+  "n = 240" = 240
+)
+output = vector("list", length = 4)
+output[[1]] = rerun(100, sim_mean_sd(samp_size = n_list[[1]])) %>% 
+  bind_rows()
+
+
+for (i in 1:4) {
+  output[[i]] = 
+    rerun(100, sim_mean_sd(samp_size = n_list[[i]])) %>% 
+    bind_rows()
+}
+
+```
